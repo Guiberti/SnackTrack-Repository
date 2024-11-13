@@ -1,3 +1,4 @@
+package src;
 public class Passo {
   private String titulo;
   private String descricao;

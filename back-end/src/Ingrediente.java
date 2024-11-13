@@ -1,3 +1,4 @@
+package src;
 public class Ingrediente {
   private String nome;
   private String unidadeDeMedida;

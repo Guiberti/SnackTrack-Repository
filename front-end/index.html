@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão da Produção - Fábrica Alimentícia</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navegação com SPA</title>
+  <link rel="stylesheet" href="css/styleLayout.css">
 </head>
 <body>
-    <header>
-        <h1>Fábrica Alimentícia - Gestão da Produção</h1>
-    </header>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="#" onclick="showScreen('tela1')">Tela 1</a>
+    <a href="#" onclick="showScreen('tela2')">Tela 2</a>
+    <a href="#" onclick="showScreen('tela3')">Tela 3</a>
+  </div>
 
-    <section id="company-info" class="section">
-        <h2>Dados da Empresa</h2>
-        <p id="company-details">Carregando...</p>
-    </section>
+  <div class="content">
+    <div id="tela1" class="container">
+      <h1>Página 1</h1>
+      <p>Conteúdo da primeira tela, conforme o layout da imagem.</p>
+      <button class="button" onclick="exampleFunction()">Ação</button>
+    </div>
+    <div id="tela2" class="container hidden">
+      <h2>Página 2</h2>
+      <p>Conteúdo da segunda tela, conforme o layout da imagem.</p>
+      <button class="button" onclick="exampleFunction()">Ação</button>
+    </div>
+    <div id="tela3" class="container hidden">
+      <h2>Página 3</h2>
+      <p>Conteúdo da terceira tela, conforme o layout da imagem.</p>
+      <button class="button" onclick="exampleFunction()">Ação</button>
+    </div>
+  </div>
 
-    <section id="stock-info" class="section">
-        <h2>Estoque</h2>
-        <ul id="stock-list">Carregando...</ul>
-    </section>
-
-    <section id="production-info" class="section">
-        <h2>Produção</h2>
-        <ul id="production-list">Carregando...</ul>
-    </section>
-
-    <script src="js/script.js"></script>
+  <script src="js/scriptAlternar.js"></script>
 </body>
 </html>
