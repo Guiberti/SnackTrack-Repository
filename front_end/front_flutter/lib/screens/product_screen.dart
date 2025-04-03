@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'edit_product_screen.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Lista de produtos (dados fictícios para teste)
+    final List<Map<String, dynamic>> products = [
+      {
+        'name': 'Farinha de Trigo',
+        'currentQuantity': 20,
+        'maxQuantity': 200,
+        'expirationDate': '06/2026',
+        'unitValue': 10.0
+      },
+      {
+        'name': 'Açúcar',
+        'currentQuantity': 50,
+        'maxQuantity': 500,
+        'expirationDate': '12/2025',
+        'unitValue': 5.0
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Produtos do Estoque',
-        ),
-        backgroundColor: const Color(0), // Substitua pelo código da cor desejada
+        title: const Text('Produtos do Estoque'),
+        backgroundColor: const Color(0),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,33 +58,34 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columnSpacing: 20.0,
-                    columns: const [
-                      DataColumn(label: Text('Produto')),
-                      DataColumn(label: Text('Quantidade')),
-                      DataColumn(label: Text('Quantidade MAX.')),
-                      DataColumn(label: Text('Validade')),
-                      DataColumn(label: Text('Valor UN.')),
-                      DataColumn(label: Text('Valor Total')),
-                      DataColumn(label: Text('Ações')),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        const DataCell(Text('Farinha de Trigo')),
-                        const DataCell(Text('20 KG')),
-                        const DataCell(Text('200 KG')),
-                        const DataCell(Text('04/2024')),
-                        const DataCell(Text('R\$ 10,00')),
-                        const DataCell(Text('R\$ 120,00')),
-                        DataCell(Row(
+                child: ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(product['name']),
+                        subtitle: Text(
+                            'Quantidade Atual: ${product['currentQuantity']}'),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.edit, color: Colors.blue),
                               onPressed: () {
-                                // Lógica para editar o produto
+                                // Navegar para a tela de edição
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProductScreen(
+                                      productName: product['name'],
+                                      currentQuantity: product['currentQuantity'],
+                                      maxQuantity: product['maxQuantity'],
+                                      expirationDate: product['expirationDate'],
+                                      unitValue: product['unitValue'],
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                             IconButton(
@@ -77,58 +95,10 @@ class ProductScreen extends StatelessWidget {
                               },
                             ),
                           ],
-                        )),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Farinha de Trigo')),
-                        const DataCell(Text('20 KG')),
-                        const DataCell(Text('200 KG')),
-                        const DataCell(Text('04/2024')),
-                        const DataCell(Text('R\$ 10,00')),
-                        const DataCell(Text('R\$ 120,00')),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.blue),
-                              onPressed: () {
-                                // Lógica para editar o produto
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () {
-                                // Lógica para excluir o produto
-                              },
-                            ),
-                          ],
-                        )),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Farinha de Trigo')),
-                        const DataCell(Text('20 KG')),
-                        const DataCell(Text('200 KG')),
-                        const DataCell(Text('04/2024')),
-                        const DataCell(Text('R\$ 10,00')),
-                        const DataCell(Text('R\$ 120,00')),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.blue),
-                              onPressed: () {
-                                // Lógica para editar o produto
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () {
-                                // Lógica para excluir o produto
-                              },
-                            ),
-                          ],
-                        )),
-                      ]),
-                    ],
-                  ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
